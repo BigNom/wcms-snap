@@ -60,12 +60,10 @@ Here again you should state what actually happens when the code above gets
 executed.
 
 ### Deploying / Publishing
-give instructions on how to build and release a new version
-In case there's some step you have to take that publishes this project to a
-server, this is the right time to state it.
+Deploying to netlify make sure react-snap is installed on the server side
 
 ```shell
-packagemanager deploy your-project -s server.com -u username -p password
+npm install react-snap --save
 ```
 
 And again you'd need to tell what the previous code actually does.
