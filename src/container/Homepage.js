@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
+
 import productActions from '../actions/products'
 
 import './Homepage.css';
 import ProductGrid from '../components/ProductGrid'
 import ShoppingList from '../components/ShoppingList'
 
+
+const style = {
+  margin: 12,
+};
+
 class Homepage extends Component {
   render() {
     return (
       <div>
-        <div>
-
-        </div>
         <div className="HomepageContainer">
             <div className="ProductsContainer">
+            <div>
+              <Paper zDepth={1} style={{padding: '1em'}}>
+                <span>Presets: </span>
+                <RaisedButton 
+                label="UAVFutures $100 build" primary={true} style={style} 
+                onClick={() => this.props.selectPreset('uav_futures_100')} />
+                <RaisedButton 
+                label="30 AMP alie build" primary={true} style={style} 
+                onClick={() => this.props.selectPreset('30a_alien')} />
+              </Paper>
+            </div>
               <ProductGrid
                 products={this.props.products}
                 onProductSelect={this.props.onProductSelect}
@@ -43,6 +59,9 @@ const mapDispatchToProps = dispatch => {
     },
     onProductDeselect: (product) => {
       dispatch(productActions.productDeSelected(product))
+    },
+    selectPreset: (name) => {
+      dispatch(productActions.selectPreset(name))
     }
   }
 }

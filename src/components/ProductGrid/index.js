@@ -1,5 +1,4 @@
 import React from 'react';
-import FontIcon from 'material-ui/FontIcon'
 import Frames from '../products/frames'
 import FCs from '../products/fcs'
 import Motors from '../products/motors'
@@ -9,26 +8,13 @@ import Vtx from '../products/vtx'
 import Props from '../products/props'
 import Pdb from '../products/pdb'
 import Antenna from '../products/antenna'
+import Receiver from '../products/receiver'
 
-import ReactToolTip from 'react-tooltip'
+import FontIcon from 'material-ui/FontIcon';
 import productRenderer from '../lib/product-renderer'
+import ToolTips from './tooltips'
 
 import './index.css'
-
-const Tooltip = () => {
-  return(
-    <div>
-    <ReactToolTip id="FramesInfoTooltip" type="dark" effect="solid">
-    Your frame is the basis on which everything else is built. All of the frames
-    listed here are between 210 and 250 mm in size.
-    </ReactToolTip>
-    <ReactToolTip id="FlightControllerTooltip" type="dark" effect="solid">
-    The flight controller coordinates communication between the vaious components on the
-    quad copter.
-    </ReactToolTip>
-    </div>
-  )
-}
 
 const ProductGrid = (props) => {
 
@@ -38,45 +24,71 @@ const ProductGrid = (props) => {
     <div className='ProductGrid'>
       <div className='ProductGridColumn'>
         <h2>Frames
-        <FontIcon data-tip data-for="FramesInfoTooltip" className="material-icons"style={iconStyles}>
-        help
-        </FontIcon>
+          <FontIcon data-tip data-for="FramesInfoTooltip" className="material-icons" style={iconStyles}>help</FontIcon>
         </h2>
+
         { productRenderer(Frames, props) }
       </div>
       <div className='ProductGridColumn'>
         <h2>Flight Controllers
+          <FontIcon data-tip data-for="FlightControllerToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
         </h2>
         { productRenderer(FCs, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>Motors</h2>
+        <h2>Motors
+          <FontIcon data-tip data-for="MotorsToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+        </h2>
         { productRenderer(Motors, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>Speed Controllers</h2>
+        <h2>Speed Controllers
+          <FontIcon data-tip data-for="SpeedControllersToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+        </h2>
         { productRenderer(Esc, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>Cameras</h2>
+        <h2>Cameras
+          <FontIcon data-tip data-for="CamerasToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+        </h2>
         { productRenderer(Cams, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>Video Transmitter</h2>
+        <h2>Video Transmitter
+          <FontIcon data-tip data-for="VTXToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+
+        </h2>
         { productRenderer(Vtx, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>Propellers</h2>
-        { productRenderer(Props, props) }
+        <h2>VTX Antenna
+        <FontIcon data-tip data-for="AntennaToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+
+        </h2>
+        { productRenderer(Antenna, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>PDB</h2>
+        <h2>Receiver
+        <FontIcon data-tip data-for="ReceiverToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+
+        </h2>
+        { productRenderer(Receiver, props) }
+      </div>
+      <div className='ProductGridColumn'>
+        <h2>PDB
+        <FontIcon data-tip data-for="PDBToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+
+        </h2>
         { productRenderer(Pdb, props) }
       </div>
       <div className='ProductGridColumn'>
-        <h2>VTX Antenna</h2>
-        { productRenderer(Antenna, props) }
+        <h2>Propellers
+        <FontIcon data-tip data-for="PropellersToolTip" className="material-icons" style={iconStyles}>help</FontIcon>
+
+        </h2>
+        { productRenderer(Props, props) }
       </div>
+      <ToolTips/>
     </div>
   )
 }

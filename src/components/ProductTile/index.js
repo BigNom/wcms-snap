@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
+import React from 'react';
 import Paper from 'material-ui/Paper'
 import Checkbox from 'material-ui/Checkbox';
+import Dialog from 'material-ui/Dialog';
+// import Chip from 'material-ui/Chip';
 
 import './index.css'
 
 class ProductTile extends React.Component{
+
   state = {
     open: false,
   };
@@ -17,13 +19,29 @@ class ProductTile extends React.Component{
   handleClose = () => {
     this.setState({open: false});
   };
+
   thisProductChecked = () => {
     return this.props.allProducts.findIndex((product) => {
       return this.props.product.name === product.name
     })
   }
 
-  render() {
+  getProductLinks = () => {
+    return Object.keys(this.props.product.shop).map((key, i) => {
+      let url = this.props.product.shop[ key ]
+      if(String(key) === 'banggood') url += '?p=H101138294533201701A'
+      if(String(key) === 'piroflip' || String(key) === 'getfpv') url += '?s=fpvbuildcalc'
+      return { name: key, url }
+    })
+  }
+
+  renderProductLinks = () => {
+    return this.getProductLinks().map((link, i) => {
+      return <a key={i} className="ProductLink" href={link.url} target="_blank">{link.name}</a>
+    })
+  }
+
+  render = () => {
     return (
       <div className="ProductTile">
         <Paper zDepth={1}>
@@ -33,11 +51,7 @@ class ProductTile extends React.Component{
           <div className="ProductLinkList">
             <span className='ProductPrice'>${ this.props.product.price.toFixed(2) }</span>
             {
-              Object.keys(this.props.product.shop).map((key, i) => {
-                let url = this.props.product.shop[ key ]
-                if(String(key) === 'banggood') url += '?p=H101138294533201701A'
-                return <a key={i} className="ProductLink" href={url} target="_blank">{key}</a>
-              })
+              this.renderProductLinks()
             }
           </div>
           <div className="ProductImageContainer">
@@ -50,32 +64,37 @@ class ProductTile extends React.Component{
                 this.props.onProductSelect(this.props.product)
               }}/>
             </div>
-            <a onClick={this.handleOpen}>
-            <img className='ProductImage'
-            src={ this.props.product.image }
-            alt={this.props.product.name}
-          />          
+            <a onClick={this.handleOpen} style={{ cursor: 'pointer'}}>
+              <img className='ProductImage'
+                src={this.props.product.image}
+                alt={this.props.product.name}
+              />
             </a>
-  
             <Dialog
-            title={ this.props.product.name }
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-          <h3>{ this.props.product.name}</h3>
-          <p>{ this.props.product.notes }</p>
-          <img className='ProductImageLarge'
-          src={ this.props.product.image }
-          alt={this.props.product.name}
-        />
-          </Dialog>
+              title={ this.props.product.name }
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              <p>{ this.props.product.notes }</p>
+              <div className="CenterImage">
+                <a href={this.getProductLinks()[0].url} target="_blank" className="ProductLink">
+                  <img className='ProductImageLarge'
+                    src={this.props.product.image}
+                    alt={this.props.product.name}
+                  />
+                </a>
+              </div>
+              <h3>Shopping Links</h3>
+              {
+                this.renderProductLinks()
+              }
+            </Dialog>
           </div>
         </Paper>
       </div>
     )
   }
-
 }
 
 export default ProductTile;

@@ -22,17 +22,13 @@ class App extends Component {
             <Toolbar style={{height: '7em', backgroundColor: '#222'}}>
               <ToolbarGroup firstChild={true}>
                 <img src="/images/cyclone.png" className="App-logo" alt="logo" />
-
+                <ToolbarSeparator style={{margin: '1em'}}  />
+                <h1 className="App-title">FPV Build Calculator</h1>
               </ToolbarGroup>
               <ToolbarGroup firstChild={true}>
-              <h1 className="App-title">FPV Build Calculator</h1>
-
-              </ToolbarGroup>
-              <ToolbarGroup firstChild={true}>
-              <Link className='HeaderLink' to="/">Home</Link>
-              </ToolbarGroup>
-              <ToolbarGroup firstChild={true}>
-              <Link className='HeaderLink' to="/about">About</Link>
+                <Link className='HeaderLink' to="/">Home</Link>
+                <ToolbarSeparator style={{margin: '1em'}} />
+                <Link className='HeaderLink' to="/about">About</Link>
               </ToolbarGroup>
             </Toolbar>
           </header>
